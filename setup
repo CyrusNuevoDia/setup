@@ -1,0 +1,6 @@
+#!/usr/bin/ruby
+# frozen_string_literal: true
+
+require_relative "lib/setup_cli"
+
+exit Setup::CLI.run(ARGV, File.realpath(__dir__))

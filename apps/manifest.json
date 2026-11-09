@@ -1,0 +1,945 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "1password",
+      "name": "1Password",
+      "paths": [
+        "/Applications/1Password.app"
+      ],
+      "bundleIds": [
+        "com.1password.1password"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "1password",
+        "url": "https://1password.com/"
+      }
+    },
+    {
+      "id": "adguard",
+      "name": "Adguard",
+      "paths": [
+        "/Applications/Adguard.app"
+      ],
+      "bundleIds": [
+        "com.adguard.mac.adguard"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "adguard",
+        "url": "https://adguard.com/"
+      }
+    },
+    {
+      "id": "adguard-for-safari",
+      "name": "AdGuard for Safari",
+      "paths": [
+        "/Applications/AdGuard for Safari.app"
+      ],
+      "bundleIds": [
+        "com.adguard.safari.AdGuard"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "mas",
+        "id": "1440147259",
+        "url": "https://apps.apple.com/app/id1440147259"
+      }
+    },
+    {
+      "id": "alfred-5",
+      "name": "Alfred 5",
+      "paths": [
+        "/Applications/Alfred 5.app"
+      ],
+      "bundleIds": [
+        "com.runningwithcrayons.Alfred"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "alfred",
+        "url": "https://www.alfredapp.com/"
+      }
+    },
+    {
+      "id": "amphetamine",
+      "name": "Amphetamine",
+      "paths": [
+        "/Applications/Amphetamine.app"
+      ],
+      "bundleIds": [
+        "com.if.Amphetamine"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "mas",
+        "id": "937984704",
+        "url": "https://apps.apple.com/app/id937984704"
+      }
+    },
+    {
+      "id": "appcleaner",
+      "name": "AppCleaner",
+      "paths": [
+        "/Applications/AppCleaner.app"
+      ],
+      "bundleIds": [
+        "net.freemacsoft.AppCleaner"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "appcleaner",
+        "url": "https://freemacsoft.net/appcleaner/"
+      }
+    },
+    {
+      "id": "bartender-6",
+      "name": "Bartender 6",
+      "paths": [
+        "/Applications/Bartender 6.app"
+      ],
+      "bundleIds": [
+        "com.surteesstudios.Bartender"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "manual",
+        "reason": "Use the vendor download for the target macOS. The general Homebrew bartender cask installs a newer major version, so do not silently change this channel.",
+        "url": "https://www.macbartender.com/Bartender6/support/"
+      }
+    },
+    {
+      "id": "betterdisplay",
+      "name": "BetterDisplay",
+      "paths": [
+        "/Applications/BetterDisplay.app"
+      ],
+      "bundleIds": [
+        "pro.betterdisplay.BetterDisplay"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "betterdisplay",
+        "url": "https://betterdisplay.pro/"
+      }
+    },
+    {
+      "id": "cap",
+      "name": "Cap",
+      "paths": [
+        "/Applications/Cap.app"
+      ],
+      "bundleIds": [
+        "so.cap.desktop"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "creative-media",
+      "install": {
+        "type": "cask",
+        "id": "cap",
+        "url": "https://cap.so/"
+      }
+    },
+    {
+      "id": "charles",
+      "name": "Charles",
+      "paths": [
+        "/Applications/Charles.app"
+      ],
+      "bundleIds": [
+        "com.xk72.Charles"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "charles",
+        "url": "https://www.charlesproxy.com/"
+      }
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "paths": [
+        "/Applications/Codex.app",
+        "/Applications/ChatGPT.app"
+      ],
+      "bundleIds": [
+        "com.openai.codex"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "manual",
+        "reason": "Install the Codex desktop app from OpenAI.",
+        "url": "https://developers.openai.com/codex/app/"
+      }
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "paths": [
+        "/Applications/Claude.app"
+      ],
+      "bundleIds": [
+        "com.anthropic.claudefordesktop"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "claude",
+        "url": "https://claude.com/download"
+      }
+    },
+    {
+      "id": "cleanshot-x",
+      "name": "CleanShot X",
+      "paths": [
+        "/Applications/CleanShot X.app"
+      ],
+      "bundleIds": [
+        "pl.maketheweb.cleanshotx"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "cleanshot",
+        "url": "https://cleanshot.com/"
+      }
+    },
+    {
+      "id": "cmux",
+      "name": "cmux",
+      "paths": [
+        "/Applications/cmux.app"
+      ],
+      "bundleIds": [
+        "com.cmuxterm.app"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "cmux",
+        "url": "https://www.cmux.dev/"
+      }
+    },
+    {
+      "id": "coconutbattery",
+      "name": "coconutBattery",
+      "paths": [
+        "/Applications/coconutBattery.app"
+      ],
+      "bundleIds": [
+        "com.coconut-flavour.coconutBattery"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "coconutbattery",
+        "url": "https://www.coconut-flavour.com/coconutbattery/"
+      }
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "paths": [
+        "/Applications/Cursor.app"
+      ],
+      "bundleIds": [
+        "com.todesktop.230313mzl4w4u92"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "cursor",
+        "url": "https://www.cursor.com/"
+      }
+    },
+    {
+      "id": "daisydisk",
+      "name": "DaisyDisk",
+      "paths": [
+        "/Applications/DaisyDisk.app"
+      ],
+      "bundleIds": [
+        "com.daisydiskapp.DaisyDiskStandAlone"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "daisydisk",
+        "url": "https://daisydiskapp.com/"
+      }
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "paths": [
+        "/Applications/Discord.app"
+      ],
+      "bundleIds": [
+        "com.hnc.Discord"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "discord",
+        "url": "https://discord.com/"
+      }
+    },
+    {
+      "id": "fantastical",
+      "name": "Fantastical",
+      "paths": [
+        "/Applications/Fantastical.app"
+      ],
+      "bundleIds": [
+        "com.flexibits.fantastical2.mac"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "mas",
+        "id": "975937182",
+        "url": "https://apps.apple.com/app/id975937182"
+      }
+    },
+    {
+      "id": "fork",
+      "name": "Fork",
+      "paths": [
+        "/Applications/Fork.app"
+      ],
+      "bundleIds": [
+        "com.DanPristupov.Fork"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "fork",
+        "url": "https://fork.dev/"
+      }
+    },
+    {
+      "id": "ghostty",
+      "name": "Ghostty",
+      "paths": [
+        "/Applications/Ghostty.app"
+      ],
+      "bundleIds": [
+        "com.mitchellh.ghostty"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "ghostty",
+        "url": "https://ghostty.org/"
+      }
+    },
+    {
+      "id": "google-chrome",
+      "name": "Google Chrome",
+      "paths": [
+        "/Applications/Google Chrome.app"
+      ],
+      "bundleIds": [
+        "com.google.Chrome"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "google-chrome",
+        "url": "https://www.google.com/chrome/"
+      }
+    },
+    {
+      "id": "granola",
+      "name": "Granola",
+      "paths": [
+        "/Applications/Granola.app"
+      ],
+      "bundleIds": [
+        "com.granola.app"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "granola",
+        "url": "https://www.granola.ai/"
+      }
+    },
+    {
+      "id": "helium",
+      "name": "Helium",
+      "paths": [
+        "/Applications/Helium.app"
+      ],
+      "bundleIds": [
+        "net.imput.helium"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "helium-browser",
+        "url": "https://helium.computer/"
+      }
+    },
+    {
+      "id": "iina",
+      "name": "IINA",
+      "paths": [
+        "/Applications/IINA.app"
+      ],
+      "bundleIds": [
+        "com.colliderli.iina"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "iina",
+        "url": "https://iina.io/"
+      }
+    },
+    {
+      "id": "karabiner-elements",
+      "name": "Karabiner-Elements",
+      "paths": [
+        "/Applications/Karabiner-Elements.app"
+      ],
+      "bundleIds": [
+        "org.pqrs.Karabiner-Elements.Settings"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "karabiner-elements",
+        "url": "https://karabiner-elements.pqrs.org/"
+      }
+    },
+    {
+      "id": "keka",
+      "name": "Keka",
+      "paths": [
+        "/Applications/Keka.app"
+      ],
+      "bundleIds": [
+        "com.aone.keka"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "keka",
+        "url": "https://www.keka.io/"
+      }
+    },
+    {
+      "id": "microsoft-word",
+      "name": "Microsoft Word",
+      "paths": [
+        "/Applications/Microsoft Word.app"
+      ],
+      "bundleIds": [
+        "com.microsoft.Word"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "productivity",
+      "install": {
+        "type": "mas",
+        "id": "462054704",
+        "url": "https://apps.apple.com/app/id462054704"
+      }
+    },
+    {
+      "id": "namechanger",
+      "name": "NameChanger",
+      "paths": [
+        "/Applications/NameChanger.app"
+      ],
+      "bundleIds": [
+        "com.mrrsoftware.NameChanger"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "namechanger",
+        "url": "https://mrrsoftware.com/namechanger/"
+      }
+    },
+    {
+      "id": "orbstack",
+      "name": "OrbStack",
+      "paths": [
+        "/Applications/OrbStack.app"
+      ],
+      "bundleIds": [
+        "dev.kdrag0n.MacVirt"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "orbstack",
+        "url": "https://orbstack.dev/"
+      }
+    },
+    {
+      "id": "ports",
+      "name": "Ports",
+      "paths": [
+        "/Applications/Ports.app"
+      ],
+      "bundleIds": [
+        "com.atapper.Ports"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "manual",
+        "reason": "No matching official Homebrew cask was found. The installed binary references this vendor page; confirm the signed app identity before installation.",
+        "url": "https://ports-mac-app.vercel.app"
+      }
+    },
+    {
+      "id": "rectangle",
+      "name": "Rectangle",
+      "paths": [
+        "/Applications/Rectangle.app"
+      ],
+      "bundleIds": [
+        "com.knollsoft.Rectangle"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "rectangle",
+        "url": "https://rectangleapp.com/"
+      }
+    },
+    {
+      "id": "safari",
+      "name": "Safari",
+      "paths": [
+        "/Applications/Safari.app"
+      ],
+      "bundleIds": [
+        "com.apple.Safari"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "system",
+        "reason": "Included with macOS."
+      }
+    },
+    {
+      "id": "scrawl",
+      "name": "Scrawl",
+      "paths": [
+        "/Applications/Scrawl.app"
+      ],
+      "bundleIds": [
+        "dev.kitlangton.scrawl"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "kitlangton/tap/scrawl",
+        "url": "https://scrawl.kitlangton.com/"
+      }
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "paths": [
+        "/Applications/Slack.app"
+      ],
+      "bundleIds": [
+        "com.tinyspeck.slackmacgap"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "mas",
+        "id": "803453959",
+        "url": "https://apps.apple.com/app/id803453959"
+      }
+    },
+    {
+      "id": "slashy",
+      "name": "Slashy",
+      "paths": [
+        "/Applications/Slashy.app"
+      ],
+      "bundleIds": [
+        "com.slashy.email"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "productivity",
+      "install": {
+        "type": "cask",
+        "id": "slashy",
+        "url": "https://www.slashy.com/"
+      }
+    },
+    {
+      "id": "soulver",
+      "name": "Soulver",
+      "paths": [
+        "/Applications/Soulver.app"
+      ],
+      "bundleIds": [
+        "app.soulver.appstore.mac"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "productivity",
+      "install": {
+        "type": "mas",
+        "id": "1508732804",
+        "url": "https://apps.apple.com/app/id1508732804"
+      }
+    },
+    {
+      "id": "soundsource",
+      "name": "SoundSource",
+      "paths": [
+        "/Applications/SoundSource.app"
+      ],
+      "bundleIds": [
+        "com.rogueamoeba.soundsource"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "soundsource",
+        "url": "https://rogueamoeba.com/soundsource/"
+      }
+    },
+    {
+      "id": "table-tool",
+      "name": "Table Tool",
+      "paths": [
+        "/Applications/Table Tool.app"
+      ],
+      "bundleIds": [
+        "at.eggerapps.tabletool"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "productivity",
+      "install": {
+        "type": "mas",
+        "id": "1122008420",
+        "url": "https://apps.apple.com/app/id1122008420"
+      }
+    },
+    {
+      "id": "tableplus",
+      "name": "TablePlus",
+      "paths": [
+        "/Applications/Setapp/TablePlus.app"
+      ],
+      "bundleIds": [
+        "com.tinyapp.TablePlus-setapp"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "manual",
+        "reason": "Installed through Setapp with bundle com.tinyapp.TablePlus-setapp. Install Setapp, sign in, and install TablePlus there.",
+        "url": "https://setapp.com/apps/tableplus"
+      }
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram",
+      "paths": [
+        "/Applications/Telegram.app"
+      ],
+      "bundleIds": [
+        "ru.keepcoder.Telegram"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "mas",
+        "id": "747648890",
+        "url": "https://apps.apple.com/app/id747648890"
+      }
+    },
+    {
+      "id": "things3",
+      "name": "Things3",
+      "paths": [
+        "/Applications/Things3.app"
+      ],
+      "bundleIds": [
+        "com.culturedcode.ThingsMac"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "productivity",
+      "install": {
+        "type": "mas",
+        "id": "904280696",
+        "url": "https://apps.apple.com/app/id904280696"
+      }
+    },
+    {
+      "id": "topnotch",
+      "name": "TopNotch",
+      "paths": [
+        "/Applications/TopNotch.app"
+      ],
+      "bundleIds": [
+        "pl.maketheweb.TopNotch"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "utilities",
+      "install": {
+        "type": "cask",
+        "id": "topnotch",
+        "url": "https://topnotch.app/"
+      }
+    },
+    {
+      "id": "wispr-flow",
+      "name": "Wispr Flow",
+      "paths": [
+        "/Applications/Wispr Flow.app"
+      ],
+      "bundleIds": [
+        "com.electron.wispr-flow"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "wispr-flow",
+        "url": "https://wisprflow.ai/"
+      }
+    },
+    {
+      "id": "xcode",
+      "name": "Xcode",
+      "paths": [
+        "/Applications/Xcode.app"
+      ],
+      "bundleIds": [
+        "com.apple.dt.Xcode"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "mas",
+        "id": "497799835",
+        "url": "https://apps.apple.com/app/id497799835"
+      }
+    },
+    {
+      "id": "zed-preview",
+      "name": "Zed Preview",
+      "paths": [
+        "/Applications/Zed Preview.app"
+      ],
+      "bundleIds": [
+        "dev.zed.Zed-Preview"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "development",
+      "install": {
+        "type": "cask",
+        "id": "zed@preview",
+        "url": "https://zed.dev/"
+      }
+    },
+    {
+      "id": "zoom-us",
+      "name": "zoom.us",
+      "paths": [
+        "/Applications/zoom.us.app"
+      ],
+      "bundleIds": [
+        "us.zoom.xos"
+      ],
+      "profiles": [
+        "work"
+      ],
+      "default": true,
+      "group": "communication",
+      "install": {
+        "type": "cask",
+        "id": "zoom",
+        "url": "https://www.zoom.us/"
+      }
+    }
+  ]
+}

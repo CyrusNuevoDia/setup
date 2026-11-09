@@ -1,0 +1,8 @@
+{
+  "links": [
+    {
+      "source": "config/mise/config.toml",
+      "target": ".config/mise/config.toml"
+    }
+  ]
+}

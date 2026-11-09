@@ -1,0 +1,14 @@
+[tools]
+bun = "latest"
+node = "26"
+python = "3.14"
+rust = "latest"
+deno = "latest"
+erlang = "28"
+elixir = "1.19"
+ruby = "4"
+postgres = "17.6"
+pnpm = "12.4.2"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]

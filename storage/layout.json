@@ -1,0 +1,16 @@
+{
+  "links": [
+    {
+      "source": ".local",
+      "destination": ".local"
+    },
+    {
+      "source": ".cache",
+      "destination": ".cache"
+    },
+    {
+      "source": "Git/work",
+      "destination": "work"
+    }
+  ]
+}
