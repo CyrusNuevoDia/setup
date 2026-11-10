@@ -19,6 +19,22 @@
     {
       "source": "config/ghostty/config",
       "target": "Library/Application Support/com.mitchellh.ghostty/config"
+    },
+    {
+      "source": "config/zsh/zshenv",
+      "target": ".zshenv"
+    },
+    {
+      "source": "config/zsh/zprofile",
+      "target": ".zprofile"
+    },
+    {
+      "source": "config/zsh/zshrc",
+      "target": ".zshrc"
+    },
+    {
+      "source": "config/zsh/aliases",
+      "target": ".aliases"
     }
   ]
 }

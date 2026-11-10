@@ -78,6 +78,9 @@
   "show_wrap_guides": true,
   "wrap_guides": [120],
   "scroll_beyond_last_line": "off",
+  "auto_install_extensions": {
+    "solarized": true,
+  },
   "theme": {
     "mode": "system",
     "light": "Solarized Light",

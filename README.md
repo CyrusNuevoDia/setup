@@ -27,15 +27,29 @@ The plan lists the storage aliases, packages, configuration links, and app insta
    ```
 
 4. Use the reported vendor or App Store routes for pending apps. Sign in and enter licenses on the Mac as needed.
-5. To activate mise in Zsh, add `eval "$(mise activate zsh)"` to `~/.zshrc` after Homebrew's shell initialization.
+5. Open a new Zsh terminal to load Powerlevel10k and activate mise.
 
 The storage stage creates `~/.local`, `~/.cache`, and `~/Git/work` as aliases on `Code`. It stops if it encounters an existing populated directory. Setup backs up conflicting configuration files under `~/.setup-backups/` before linking replacements.
 
 The app catalog is in `apps/manifest.json`, Homebrew tools are in `brew/Brewfile`, and runtime versions are in `config/mise/config.toml`. Configure sign-ins and SSH on the destination Mac.
 
+## Restore Zsh and Powerlevel10k
+
+The packages stage installs Oh My Zsh, Powerlevel10k, and Zsh Autosuggestions. The links stage installs the portable shell files with the prompt layout, key bindings, aliases, and mise activation.
+
+```sh
+git pull --ff-only
+./setup apply --only packages,links --json
+exec zsh -l
+```
+
+Run these commands from an existing setup checkout after mounting Code and installing Homebrew. Setup backs up the shell files it replaces under `~/.setup-backups/`. Put machine-specific interactive settings in `~/.config/setup/zshrc.local` and local credentials in `~/.config/setup/secrets.zsh` with mode `600`.
+
 ## Restore Zed and Ghostty settings
 
-The links stage includes the Zed settings, keymap, and Solarized theme, plus the macOS Ghostty config. In an existing setup checkout, update and apply the links stage:
+The links stage restores Zed settings and keybindings, the custom Solarized (Ghostty) variants in Zed, and the macOS Ghostty config. Zed installs the [Solarized extension](https://zed.dev/extensions/solarized) to supply the selected `Solarized Light` and `Solarized Dark` themes, which follow the macOS appearance.
+
+Update and apply the links stage from your existing checkout.
 
 ```sh
 git pull --ff-only

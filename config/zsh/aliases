@@ -1,0 +1,6 @@
+if (( $+commands[eza] )); then
+  alias l=eza
+  alias ls=eza
+fi
+(( $+commands[fd] )) && alias find=fd
+(( $+commands[sk] )) && alias fzf=sk

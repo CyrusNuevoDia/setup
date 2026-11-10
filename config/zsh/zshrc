@@ -1,0 +1,138 @@
+setopt extended_glob
+ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+zstyle ':omz:update' mode disabled
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs background_jobs root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right" # fish shell style truncating
+
+MODE_CURSOR_VICMD="block"
+MODE_CURSOR_VIINS="blinking bar"
+
+COMPLETION_WAITING_DOTS=true
+DISABLE_UNTRACKED_FILES_DIRTY=true
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#777"
+
+plugins=(zsh-autosuggestions docker docker-compose git-extras history-substring-search macos yarn z)
+
+[[ -d "$HOME/.docker/completions" ]] && fpath=("$HOME/.docker/completions" "${fpath[@]}")
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  # Defer Oh My Zsh's own completion setup, including its security and cache checks.
+  _omzScript=$(<"$ZSH/oh-my-zsh.sh")
+  _completionStart=$'() {\n  local REPLY\n  _omz_git_head'
+  _completionEnd=$'\n_omz_source() {'
+  if [[ $_omzScript == *"$_completionStart"*'compinit -i -d "$ZSH_COMPDUMP"'*"$_completionEnd"* ]]; then
+    _omzBefore=${_omzScript%%"$_completionStart"*}
+    _omzCompletion=${_omzScript#"$_omzBefore"}
+    _omzAfter=${_omzCompletion#*"$_completionEnd"}
+    _omzCompletion=${_omzCompletion%%"$_completionEnd"*}
+
+    typeset -ga _queuedCompdefs=()
+    compdef() { _queuedCompdefs+=("${(j: :)${(q)@}}"); }
+    functions[_initOmzCompletion]=$_omzCompletion
+    eval "$_omzBefore$_completionEnd$_omzAfter"
+  else
+    # Fall back to normal startup if an Oh My Zsh update changes the layout.
+    source "$ZSH/oh-my-zsh.sh"
+  fi
+  unset _omzScript _completionStart _completionEnd _omzBefore _omzCompletion _omzAfter
+fi
+
+[[ -r "${ZDOTDIR:-$HOME}/.aliases" ]] && source "${ZDOTDIR:-$HOME}/.aliases"
+
+if (( $+functions[history-substring-search-up] )); then
+  zmodload zsh/terminfo
+  bindkey -M vicmd 'k' history-substring-search-up
+  bindkey -M vicmd 'j' history-substring-search-down
+  [[ -n ${terminfo[cuu1]} ]] && bindkey "$terminfo[cuu1]" history-substring-search-up
+  [[ -n ${terminfo[cud1]} ]] && bindkey "$terminfo[cud1]" history-substring-search-down
+fi
+
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+
+export PNPM_HOME="$HOME/Library/pnpm"
+if [[ -d "$PNPM_HOME" ]]; then
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) path=("$PNPM_HOME" "${path[@]}") ;;
+  esac
+fi
+
+# Try CLI
+# Generate Try's shell function on first use. It needs to run in this shell to change directories.
+if [[ -d /Volumes/Code/Try ]] && (( $+commands[try] )); then
+  try() {
+    local tryBin cacheDir cacheFile cacheKey cachedScript tryScript tmpFile
+    tryBin=$(whence -p try) || return 127
+    cacheDir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+    cacheFile="$cacheDir/try-init.zsh"
+
+    # Include the executable path because Try embeds it in the generated function.
+    cacheKey=$(/usr/bin/cksum < "$tryBin") || return
+    cacheKey="# $tryBin $cacheKey"
+    if [[ -r "$cacheFile" ]]; then
+      cachedScript=$(<"$cacheFile")
+    fi
+
+    if [[ "${cachedScript%%$'\n'*}" == "$cacheKey" ]]; then
+      tryScript=${cachedScript#*$'\n'}
+    else
+      tryScript=$("$tryBin" init /Volumes/Code/Try) || return
+    fi
+
+    # Keep the loader available for a retry if init doesn't produce a function.
+    local loader=${functions[try]}
+    if ! eval "$tryScript" || [[ "${functions[try]}" == "$loader" || -z "${functions[try]}" ]]; then
+      functions[try]=$loader
+      print -u2 'Try did not initialize its shell function.'
+      return 1
+    fi
+
+    if [[ "${cachedScript%%$'\n'*}" != "$cacheKey" ]] &&
+       mkdir -p -- "$cacheDir" && tmpFile=$(mktemp "$cacheDir/try-init.XXXXXXXX"); then
+      if ! { print -r -- "$cacheKey"; print -r -- "$tryScript"; } >| "$tmpFile" ||
+         ! mv -f -- "$tmpFile" "$cacheFile"; then
+        rm -f -- "$tmpFile"
+      fi
+    fi
+
+    try "$@"
+  }
+fi
+
+[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/setup/zshrc.local" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/setup/zshrc.local"
+
+if (( $+functions[_initOmzCompletion] )); then
+  _completeOnFirstTab() {
+    unfunction compdef
+    _initOmzCompletion
+    unfunction _initOmzCompletion
+
+    local definition
+    for definition in "${_queuedCompdefs[@]}"; do
+      eval "compdef $definition"
+    done
+    unset _queuedCompdefs
+
+    local widget=expand-or-complete
+    if (( $+widgets[expand-or-complete-with-dots] )); then
+      widget=expand-or-complete-with-dots
+    fi
+    local keymap
+    for keymap in emacs viins vicmd; do
+      bindkey -M "$keymap" '^I' "$widget"
+    done
+    zle "$widget"
+  }
+  zle -N _completeOnFirstTab
+  for _completionKeymap in emacs viins vicmd; do
+    bindkey -M "$_completionKeymap" '^I' _completeOnFirstTab
+  done
+  unset _completionKeymap
+fi

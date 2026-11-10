@@ -1,0 +1,16 @@
+{
+  "clones": [
+    {
+      "url": "https://github.com/ohmyzsh/ohmyzsh.git",
+      "target": ".oh-my-zsh"
+    },
+    {
+      "url": "https://github.com/romkatv/powerlevel10k.git",
+      "target": ".oh-my-zsh/custom/themes/powerlevel10k"
+    },
+    {
+      "url": "https://github.com/zsh-users/zsh-autosuggestions.git",
+      "target": ".oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    }
+  ]
+}

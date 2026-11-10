@@ -1,0 +1,12 @@
+if (( $+commands[mise] )); then
+  path=("${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}/shims" "$HOME/.local/bin" "${path[@]}")
+fi
+
+if [[ -n ${HOMEBREW_PREFIX:-} ]]; then
+  path=("$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "${path[@]}")
+  fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "${fpath[@]}")
+  export FPATH
+fi
+
+[[ -r "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"
+path=("$HOME/.local/bin" "${path[@]}")

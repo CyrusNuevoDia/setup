@@ -1,0 +1,18 @@
+export GOPATH="$HOME/.gopath"
+path=("$HOME/.local/bin" "$HOME/.bun/bin" "$GOPATH/bin" "${path[@]}")
+export EDITOR=vim
+export BAT_THEME="Solarized (light)"
+export CLICOLOR=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ENV_HINTS=1
+setopt histignorespace
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/setup/secrets.zsh" ]]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/setup/secrets.zsh"
+fi
