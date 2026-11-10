@@ -2,6 +2,7 @@
 
 require "json"
 require "pathname"
+require_relative "setup_assets"
 
 module Setup
   class Error < StandardError; end
@@ -13,20 +14,26 @@ module Setup
   end
 
   class Config
-    STAGES = %w[storage packages apps links].freeze
-    attr_reader :root, :home, :profile, :stages, :apps, :links, :storage_links, :clones
+    ASSET_STAGES = %w[fonts alfred].freeze
+    STAGES = (%w[storage packages apps links] + ASSET_STAGES).freeze
+    attr_reader :root, :home, :profile, :stages, :apps, :links, :storage_links, :clones, :assets
 
     def initialize(root, options)
       @root = File.realpath(root)
       @home = File.realpath(options.fetch(:home))
       @profile = options.fetch(:profile, 'work')
       raise Error, "Choose --profile work" unless %w[work].include?(profile)
-      requested_stages = options.fetch(:stages, STAGES)
+      requested_stages = options.fetch(:stages, options[:assets] ? STAGES : STAGES - ASSET_STAGES)
       unknown = requested_stages - STAGES
       raise Error, "Unknown stages: #{unknown.join(', ')}" unless unknown.empty?
       raise Error, 'Duplicate stages are not allowed' unless requested_stages.uniq.length == requested_stages.length
       @stages = STAGES.select { |stage| requested_stages.include?(stage) }
       raise Error, "Select at least one stage" if stages.empty?
+      asset_stages = stages & ASSET_STAGES
+      unless asset_stages.empty?
+        raise Error, 'Pass --assets with the private asset directory to restore fonts or Alfred' unless options[:assets]
+        @assets = AssetBundle.new(options[:assets], asset_stages)
+      end
       manifest = read("apps/manifest.json").fetch("apps")
       validate_apps(manifest)
       selected = options.fetch(:with, [])

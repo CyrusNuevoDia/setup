@@ -83,6 +83,40 @@ class SetupTest < Minitest::Test
     refute File.exist?(File.join(@directory, 'outside'))
   end
 
+  def test_private_assets_restore_and_rerun_without_replacing_alfred_edits
+    assets = File.join(@root, 'local/assets')
+    font = 'Family/Example.ttf'
+    preferences = 'preferences/prefs.plist'
+    write("local/assets/fonts/#{font}", 'font bytes')
+    write("local/assets/alfred/Alfred.alfredpreferences/#{preferences}", 'preferences bytes')
+    write('local/assets/fonts/manifest.json', JSON.generate(files: [{source: font, sha256: Digest::SHA256.hexdigest('font bytes')}]))
+    write('local/assets/alfred/manifest.json', JSON.generate(files: [{source: preferences, sha256: Digest::SHA256.hexdigest('preferences bytes')}]))
+
+    flags = ['--only', 'fonts,alfred', '--assets', assets]
+    result, status = cli('plan', *flags)
+    assert_equal 0, status, result.inspect
+    assert_equal({'fonts' => 1, 'alfred' => 1}, result['assets'])
+    assert_empty Dir.children(@home)
+
+    result, status = cli('apply', *flags)
+    assert_equal 2, status, result.inspect
+    assert_equal 'font bytes', File.read(File.join(@home, 'Library/Fonts', font))
+    target = File.join(result['results'].last.fetch('preferences'), preferences)
+    assert_equal 'preferences bytes', File.read(target)
+    File.write(target, 'local changes')
+
+    result, status = cli('apply', *flags)
+    assert_equal 2, status, result.inspect
+    assert_equal 0, result['results'].first['copied']
+    assert_equal 'local changes', File.read(target)
+
+    write("local/assets/fonts/#{font}", 'changed bytes')
+    result, status = cli('apply', *flags)
+    assert_equal 1, status, result.inspect
+    assert_match(/changed file in fonts bundle/, result['error'])
+    assert_equal 'font bytes', File.read(File.join(@home, 'Library/Fonts', font))
+  end
+
   def test_storage_rejects_an_ordinary_directory_or_an_unencrypted_volume
     assert_raises(Setup::Error) { Setup::CodeVolume.validate_info!({'MountPoint' => '/Volumes/Code', 'FilesystemType' => 'apfs'}) }
     info = {'MountPoint' => '/Volumes/Code', 'VolumeName' => 'Code', 'FilesystemType' => 'apfs', 'Encryption' => false, 'Locked' => false, 'GlobalPermissionsEnabled' => true, 'Writable' => true}

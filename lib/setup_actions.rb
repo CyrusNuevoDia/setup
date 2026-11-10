@@ -2,6 +2,7 @@
 
 require "digest"
 require "time"
+require "tmpdir"
 
 module Setup
   class Actions
@@ -64,6 +65,51 @@ module Setup
 
     def same_file?(source, target)
       File.file?(target) && File.size(source) == File.size(target) && Digest::SHA256.file(source).digest == Digest::SHA256.file(target).digest
+    end
+
+    def fonts
+      files = config.assets.files('fonts')
+      copied = 0
+      files.each do |relative, source|
+        target = config.home_path(File.join('Library/Fonts', relative))
+        next if same_file?(source, target)
+        backup(target)
+        FileUtils.mkdir_p(File.dirname(target))
+        FileUtils.cp(source, target, preserve: true)
+        copied += 1
+      end
+      {status: 'ok', fonts: files.length, copied: copied, backups: @backup_root}
+    end
+
+    def check_fonts
+      files = config.assets.files('fonts')
+      missing = files.count do |relative, source|
+        !same_file?(source, config.home_path(File.join('Library/Fonts', relative)))
+      end
+      {status: missing.zero? ? 'ok' : 'pending', fonts: files.length, missing: missing}
+    end
+
+    def alfred(apply: false)
+      parent = config.home_path('Library/Application Support/Alfred/Setup Restore')
+      target = File.join(parent, 'Alfred.alfredpreferences')
+      if File.symlink?(target) || (File.exist?(target) && !File.directory?(target))
+        raise Error, "Alfred restore path must be a native directory: #{target}"
+      end
+      if apply && !File.exist?(target)
+        FileUtils.mkdir_p(parent, mode: 0700)
+        scratch = Dir.mktmpdir('.preferences-', parent)
+        begin
+          config.assets.files('alfred').each do |relative, source|
+            path = File.join(scratch, relative)
+            FileUtils.mkdir_p(File.dirname(path))
+            FileUtils.cp(source, path, preserve: true)
+          end
+          File.rename(scratch, target)
+        ensure
+          FileUtils.remove_entry(scratch) if File.directory?(scratch)
+        end
+      end
+      {status: 'pending', preferences: target, syncFolder: parent, message: 'In Alfred Preferences, open Advanced and set the sync folder to the reported syncFolder.'}
     end
 
     def executable(name)

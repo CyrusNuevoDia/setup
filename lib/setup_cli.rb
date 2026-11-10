@@ -14,6 +14,7 @@ module Setup
         flags.on('--profile PROFILE', %w[work], 'Choose an install profile') { |value| options[:profile] = value }
         flags.on('--with IDS', Array, 'Include named optional apps') { |value| options[:with] = value }
         flags.on('--only STAGES', Array, 'Limit stages: ' + Config::STAGES.join(',')) { |value| options[:stages] = value }
+        flags.on('--assets PATH', 'Read a private fonts and Alfred asset directory') { |value| options[:assets] = value }
         flags.on('--home PATH', 'Restore files to another existing home directory') { |value| options[:home] = value }
         flags.on('--dry-run', 'Preview apply without changing anything') { options[:dry_run] = true }
         flags.on('--json', 'Emit one JSON document') { options[:json] = true }
@@ -64,6 +65,7 @@ module Setup
         packages: config.stages.include?('packages') ? {brewfile: 'brew/Brewfile', miseConfig: '.config/mise/config.toml', miseInstall: true, shellDependencies: config.clones} : nil,
         apps: config.stages.include?('apps') ? config.apps.map { |app| {id: app['id'], name: app['name'], installed: !!actions.installed_app_path(app), install: app['install']} } : [],
         links: config.stages.include?('links') ? config.links.map { |entry| actions.setting_state(entry) } : [],
+        assets: config.assets&.counts,
         optionalApps: config.read('apps/manifest.json')['apps'].select { |app| app['profiles'].include?(config.profile) && !app['default'] && app.dig('install', 'type') != 'excluded' }.map { |app| {id: app['id'], name: app['name'], group: app['group']} }
       }
     end
@@ -71,14 +73,15 @@ module Setup
     def self.apply(config, actions)
       raise Error, 'Run setup as your normal user, without sudo' if Process.uid.zero?
       alternate_home = config.home != File.realpath(Dir.home)
-      if alternate_home && config.stages != ['links']
-        raise Error, '--home supports file restoration only; use --only links'
+      if alternate_home && !(config.stages - %w[links fonts alfred]).empty?
+        raise Error, '--home supports file restoration only; use --only links,fonts,alfred'
       end
       results = []
       # Resolve all repository inputs and profile selections before the first effect.
       config.stages.each do |stage|
         begin
-          results << {stage: stage}.merge(actions.public_send(stage))
+          result = stage == 'alfred' ? actions.alfred(apply: true) : actions.public_send(stage)
+          results << {stage: stage}.merge(result)
         rescue Error, SystemCallError => error
           results << {stage: stage, status: 'failed', error: error.message}
           break
@@ -100,6 +103,8 @@ module Setup
                  when 'links'
                    pending = config.links.map { |entry| actions.setting_state(entry) }.reject { |entry| entry[:status] == 'ok' }
                    {status: pending.empty? ? 'ok' : 'pending', pending: pending}
+                 when 'fonts' then actions.check_fonts
+                 when 'alfred' then actions.alfred
                  end
         results << {stage: stage}.merge(result)
       end
@@ -135,7 +140,7 @@ module Setup
 
     def self.verify(config, _actions)
       config.source_path('brew/Brewfile')
-      {command: 'verify', status: 'ok', links: config.links.length, apps: config.apps.length, storageAliases: config.storage_links.length}
+      {command: 'verify', status: 'ok', links: config.links.length, apps: config.apps.length, storageAliases: config.storage_links.length, assets: config.assets&.counts}
     end
 
     def self.emit(result, json)
@@ -147,6 +152,7 @@ module Setup
         if result[:command] == 'plan' || result[:dryRun]
           puts "Stages: #{result[:stages].join(', ')}"
           puts "Storage aliases: #{result[:storage].length}; config links: #{result[:links].length}"
+          result[:assets]&.each { |kind, count| puts "  #{kind}: #{count} files" }
           result[:apps].each { |app| puts "  #{app[:installed] ? 'installed' : app[:install]['type']}: #{app[:name]} (#{app[:id]})" }
           puts 'Optional apps (add --with id,id):'
           result[:optionalApps].each { |app| puts "  #{app[:id]}: #{app[:name]} [#{app[:group]}]" }
