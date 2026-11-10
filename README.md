@@ -31,7 +31,19 @@ The plan lists the storage aliases, packages, configuration links, and app insta
 
 The storage stage creates `~/.local`, `~/.cache`, and `~/Git/work` as aliases on `Code`. It stops if it encounters an existing populated directory. Setup backs up conflicting configuration files under `~/.setup-backups/` before linking replacements.
 
-The app catalog is in `apps/manifest.json`, Homebrew tools are in `brew/Brewfile`, and runtime versions are in `config/mise/config.toml`. Sign-ins, app preferences, SSH configuration, and personal settings are configured on the destination Mac.
+The app catalog is in `apps/manifest.json`, Homebrew tools are in `brew/Brewfile`, and runtime versions are in `config/mise/config.toml`. Configure sign-ins and SSH on the destination Mac.
+
+## Restore Zed and Ghostty settings
+
+The links stage includes the Zed settings, keymap, and Solarized theme, plus the macOS Ghostty config. In an existing setup checkout, update and apply the links stage:
+
+```sh
+git pull --ff-only
+./setup plan --only links --json
+./setup apply --only links --json
+```
+
+Quit Zed and Ghostty before applying, then reopen them. Setup backs up any replaced configuration. Both apps use Berkeley Mono, which you can install from the private font bundle.
 
 ## Restore fonts and Alfred preferences
 

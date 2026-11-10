@@ -3,6 +3,22 @@
     {
       "source": "config/mise/config.toml",
       "target": ".config/mise/config.toml"
+    },
+    {
+      "source": "config/zed/settings.json",
+      "target": ".config/zed/settings.json"
+    },
+    {
+      "source": "config/zed/keymap.json",
+      "target": ".config/zed/keymap.json"
+    },
+    {
+      "source": "config/zed/themes/solarized-ghostty.json",
+      "target": ".config/zed/themes/solarized-ghostty.json"
+    },
+    {
+      "source": "config/ghostty/config",
+      "target": "Library/Application Support/com.mitchellh.ghostty/config"
     }
   ]
 }

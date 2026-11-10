@@ -1,0 +1,125 @@
+{
+  "cli_default_open_behavior": "existing_window",
+  "collaboration_panel": {
+    "button": false,
+    "dock": "left",
+  },
+  "relative_line_numbers": "enabled",
+  "preferred_line_length": 120,
+  "soft_wrap": "prefer_line",
+  "disable_ai": true,
+  "git_panel": {
+    "dock": "right",
+  },
+  "debugger": {
+    "timeout": 2000,
+  },
+  "markdown_preview": {
+    "limit_content_width": false,
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "lint": {
+          "suggestCanonicalClasses": "info",
+        },
+      },
+    },
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
+  },
+  "outline_panel": {
+    "folder_icons": false,
+    "dock": "right",
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": true,
+    "indent_size": 16.0,
+    "git_status": true,
+    "file_icons": true,
+    "folder_icons": false,
+    "entry_spacing": "standard",
+    "hide_gitignore": false,
+    "dock": "right",
+  },
+  "agent": {
+    "dock": "left",
+    "favorite_models": [],
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6",
+    },
+    "model_parameters": [],
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 14,
+  "buffer_font_family": "Berkeley Mono",
+  "buffer_line_height": { "custom": 1.4 },
+  "tab_size": 2,
+  "hard_tabs": false,
+  "format_on_save": "on",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  "show_wrap_guides": true,
+  "wrap_guides": [120],
+  "scroll_beyond_last_line": "off",
+  "theme": {
+    "mode": "system",
+    "light": "Solarized Light",
+    "dark": "Solarized Dark",
+  },
+  "languages": {
+    "Python": { "tab_size": 4 },
+    "JSON": { "tab_size": 2 },
+    "JavaScript": { "tab_size": 2, "formatter": "language_server" },
+    "TypeScript": { "tab_size": 2, "formatter": "language_server" },
+    "TSX": { "tab_size": 2, "formatter": "language_server" },
+  },
+  // .env* is claimed by Shell Script, which drags in shellcheck's SC2034 "appears unused"
+  "file_types": {
+    "Plain Text": [".env", ".env.*", "*.env"],
+  },
+  "file_scan_exclusions": [
+    "**/.DS_Store",
+    "**/.git",
+    "**/.pytest_cache/",
+    "**/.ruff_cache",
+    "**/*.tsbuildinfo",
+    "**/.venv/",
+    "**/.convex",
+    "**/.vscode",
+    "**/__pycache__",
+    "**/node_modules/",
+    "**/.entire/",
+    "**/.sst/",
+    "**/.obsidian/",
+    "**/supabase/.temp/",
+    "**/dist/",
+    "**/.next/",
+    "**/next-env.d.ts",
+    "**/_generated/",
+    "**/.wrangler/",
+    "**/.vercel/",
+    "**/.swc/",
+    "**/*.egg-info/",
+    "**/.uv-cache/",
+    "**/.eve/",
+    "**/.well-known/",
+    "**/.cache/",
+  ],
+}
