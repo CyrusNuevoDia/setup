@@ -59,6 +59,18 @@ git pull --ff-only
 
 Quit Zed and Ghostty before applying, then reopen them. Setup backs up any replaced configuration. Both apps use Berkeley Mono, which you can install from the private font bundle.
 
+## Restore Codex and Claude Code skills
+
+After the packages stage installs Bun, initialize the public skills submodule and run its installer.
+
+```sh
+git pull --ff-only
+git submodule update --init skills
+bun run skills/install.mjs
+```
+
+The installer restores custom skills and pinned third-party skills for both agents. Use `bun run skills/install.mjs --dry-run` to preview what it will install. The [skills repository](https://github.com/CyrusNuevoDia/skills) also works independently of this setup.
+
 ## Restore fonts and Alfred preferences
 
 Transfer your private asset bundle to the Mac and extract it. Pass the extracted `assets` directory to setup. The bundle has `fonts/manifest.json` and `alfred/manifest.json` with SHA-256 hashes for the captured files.
